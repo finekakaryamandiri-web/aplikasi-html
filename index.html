@@ -178,6 +178,7 @@ th { background: #f1f5f9; font-weight: 700; color: #334155; }
 .bg-highlight { background: #f0fdf4; font-weight: 700; }
 .grand-total { background: #eff6ff; font-size: 14px; font-weight: 800; color: var(--primary-blue); }
 .note-box { font-size: 11px; background: #fffbe3; border: 1px solid #fde047; padding: 10px; border-radius: 6px; margin-top: 14px; color: #713f12; line-height: 1.5; }
+
 /* PLATE N SHEET CAD MODUL */
 .cad-app { height: 100%; display: grid; grid-template-columns: 220px 320px 1fr; grid-template-rows: 1fr 40px 24px; gap: 10px; }
 .cad-aside, .center-panel, .preview-panel { background: var(--panel-bg); border: 1px solid #cbd5e1; overflow-y: auto; padding: 12px; border-radius: 6px; }
@@ -357,7 +358,6 @@ input, select, button, textarea { max-width: 100%; }
   .f-group { grid-template-columns: minmax(0, 1fr) 78px 28px; gap: 4px; }
   .f-group label { overflow-wrap: anywhere; }
   .welcome-text h1 { font-size: 20px; }
-
   .page-module { padding: 8px; }
 }
 @media print {
@@ -385,10 +385,10 @@ input, select, button, textarea { max-width: 100%; }
 </header>
 
 <div class="app-container">
-
+  
   <sidebar>
     <div class="nav-section-title">Navigasi Utama</div>
-
+    
     <div class="nav-item active" id="nav-page-home" onclick="switchPage('page-home', this)">
       <span class="nav-icon">🏠</span>
       <span>Home Dashboard</span>
@@ -416,7 +416,7 @@ input, select, button, textarea { max-width: 100%; }
     <!-- HOME DASHBOARD -->
     <div id="page-home" class="page-module active">
       <div class="dashboard-container">
-
+        
         <div class="welcome-banner">
           <div class="welcome-text">
             <h1>Selamat Datang di System Portal</h1>
@@ -432,7 +432,7 @@ input, select, button, textarea { max-width: 100%; }
         <h2 style="font-size: 16px; color: #334155; margin-bottom: 16px;">PILIH MODUL PEKERJAAN</h2>
 
         <div class="modules-grid">
-
+          
           <div class="module-card">
             <div>
               <div class="card-header-icon">📊</div>
@@ -479,10 +479,10 @@ input, select, button, textarea { max-width: 100%; }
     <div id="page-rab" class="page-module">
       <div class="rab-container">
         <div class="rab-grid">
-
+          
           <div class="rab-card">
             <h2>PARAMETER PERENCANAAN PROYEK</h2>
-
+            
             <div class="f-group">
               <label>Jenis Pekerjaan</label>
               <select id="rab-job-type" style="grid-column: span 2;" onchange="calculateRAB()">
@@ -623,19 +623,19 @@ input, select, button, textarea { max-width: 100%; }
           <label>RPM Fan</label><input id="rpm" type="number" value="2900">
           <label>Motor Power (kW)</label><input id="motor" type="number" value="7.5">
           <label>Motor RPM</label><input id="mrpm" type="number" value="2900">
-
+          
           <div class="g2">
             <div><label>Inlet Ø (mm)</label><input id="din" type="number" value="300"></div>
             <div><label>Outlet Ø (mm)</label><input id="dout" type="number" value="250"></div>
           </div>
-
+          
           <label>Tipe Impeller</label>
           <select id="type">
             <option>Backward-curved</option>
             <option>Radial</option>
             <option selected>Forward-curved</option>
           </select>
-
+          
           <div class="g2">
             <div><label>Efisiensi Fan</label><input id="eta" type="number" step=".01" value=".70"></div>
             <div><label>Safety Factor</label><input id="sf" type="number" step=".01" value="1.15"></div>
@@ -718,7 +718,6 @@ input, select, button, textarea { max-width: 100%; }
 <div class="modal-overlay" id="modal-cutlist">
   <div class="modal-card">
     <h3>DAFTAR POTONGAN PLAT (CUTTING LIST)</h3>
-
     <div id="cutlist-content"></div>
     <button class="btn" style="margin-top:12px;" onclick="closeCutList()">TUTUP</button>
   </div>
@@ -737,7 +736,7 @@ function switchPage(pageId, navEl) {
   if (menuButton) menuButton.setAttribute('aria-expanded', 'false');
   document.querySelectorAll('.page-module').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
+  
   document.getElementById(pageId).classList.add('active');
   if (navEl) navEl.classList.add('active');
 }
@@ -891,7 +890,7 @@ const JOB_PROFILES = {
 function calculateRAB() {
   const jobKey = document.getElementById("rab-job-type").value;
   const profile = JOB_PROFILES[jobKey];
-
+  
   document.getElementById("unit-label").textContent = profile.unit;
 
   const days = Math.max(1, parseFloat(document.getElementById("rab-days").value) || 1);
@@ -1079,7 +1078,6 @@ function makeField(label, val, unit, id, isSelect = false) {
   if (isSelect) {
     return `<div class="f-group"><label>${label}</label><select id="${id}"><option>SS400</option><option>SUS304</option><option>Aluminium</option></select><span class="unit"></span></div>`;
   }
-
   return `<div class="f-group"><label>${label}</label><input id="${id}" value="${val}"><span class="unit">${unit}</span></div>`;
 }
 
@@ -1260,7 +1258,6 @@ function calcScrew() {
   let stepAngleVal = angleDeg / 6;
   for (let i = 0; i <= steps; i += 10) {
     let segDeg = (i / 10) * stepAngleVal;
-
     pushLine(lines, ...ptsI[i], ...ptsO[i], "MARK", `B:${B.toFixed(0)}mm|${segDeg.toFixed(0)}°`);
   }
 
@@ -1441,7 +1438,6 @@ function drawVDim(x, y1, y2, label) {
 
 function zoomViewport(v) { viewScale *= v; calculate(); }
 function resetViewport() { viewScale = 1; calculate(); }
-
 function toggleGridLines() { isGridOn = !isGridOn; calculate(); }
 
 function openCutList() {
@@ -1539,20 +1535,20 @@ function calculateFan() {
   $('oB').textContent = F(d.B1, 1) + ' / ' + F(d.B2, 1);
   $('oShaft').textContent = F(d.srec, 0);
   $('status').innerHTML = d.req <= N('motor') ? '<div class="ok">Motor terpasang mencukupi untuk kapasitas fan.</div>' : '<div class="warn">Daya motor terpasang lebih kecil dari perhitungan.</div>';
-
+  
   $('sumt').innerHTML = rows([
     ['Airflow', F(d.Q, 0), 'CMH'], ['Pressure', F(d.dp, 0), 'Pa'], ['Air power', F(d.air, 0), 'W'], ['Shaft power', F(d.shaft, 0), 'W'],
     ['Motor required + SF', F(d.req, 2), 'kW'], ['Torque', F(d.torque, 2), 'N·m'], ['D₁ (Inlet Eye)', F(d.D1, 2), 'mm'], ['D₂ (Outer Diameter)', F(d.D2, 2), 'mm'],
     ['B₁ / B₂ Width', F(d.B1, 2) + ' / ' + F(d.B2, 2), 'mm'], ['Blade thickness', d.bt, 'mm'], ['Plate thickness', d.pt, 'mm'],
     ['Shaft Diameter', F(d.srec, 0), 'mm']
   ]);
-
+  
   $('impt').innerHTML = rows([
     ['D₁ Eye Ø', F(d.D1, 2), 'mm'], ['D₂ Outer Ø', F(d.D2, 2), 'mm'], ['Hub Ø', F(d.hub, 2), 'mm'],
     ['B₁ Width', F(d.B1, 2), 'mm'], ['B₂ Width', F(d.B2, 2), 'mm'], ['Blade thickness (t)', d.bt, 'mm'],
     ['Plate thickness (back & shroud)', d.pt, 'mm'], ['Jumlah Blade (Z)', d.Z, 'pcs']
   ]);
-
+  
   $('blt').innerHTML = rows([['Tebal Blade', d.bt, 'mm'], ['Jumlah Blade', d.Z, 'pcs'], ['Sudut Masuk β₁', d.b1, '°'], ['Sudut Keluar β₂', d.b2, '°']]);
   $('sht').innerHTML = rows([['Torsi Poros', F(d.torque, 2), 'N·m'], ['Rekomendasi Ø Poros', F(d.srec, 0), 'mm'], ['Panjang Spacing Bearing', N('blen'), 'mm']]);
   $('hot').innerHTML = rows([['D₂ Impeller', F(d.D2, 2), 'mm'], ['Housing Width', F(d.hw, 2), 'mm'], ['Inlet Ring Ø', F(d.din, 0), 'mm'], ['Outlet Flange Ø', F(d.dout, 0), 'mm']]);
@@ -1589,11 +1585,11 @@ function drawImp(d) {
   o += ln(cx, cy - R - 30, cx, cy + R + 30, '#333', 1, '8 4 2 4');
 
   let sx = 620, sy = cy, wB2 = R * (d.B2 / d.D2) * 1.8, wB1 = wB2 * 1.2, tPlat = Math.max(3, d.pt * 1.2);
-
+  
   o += `<rect x="${sx}" y="${sy - R}" width="${tPlat}" height="${R * 2}" fill="none" stroke="#000" stroke-width="2"/>`;
   o += `<polygon points="${sx + tPlat + wB2},${sy - R} ${sx + tPlat + wB1},${sy - r1} ${sx + tPlat + wB1 - tPlat},${sy - r1} ${sx + tPlat},${sy - R}" fill="none" stroke="#000" stroke-width="2"/>`;
   o += `<polygon points="${sx + tPlat + wB2},${sy + R} ${sx + tPlat + wB1},${sy + r1} ${sx + tPlat + wB1 - tPlat},${sy + r1} ${sx + tPlat},${sy + R}" fill="none" stroke="#000" stroke-width="2"/>`;
-
+  
   o += `<rect x="${sx - 20}" y="${sy - rh}" width="${tPlat + 35}" height="${rh * 2}" fill="none" stroke="#000" stroke-width="2"/>`;
   o += `<circle cx="${sx + 10}" cy="${sy}" r="5" fill="#000"/>`;
 
@@ -1622,7 +1618,6 @@ function drawBlade(d) {
   o += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#0033aa" stroke-linecap="round" stroke-dasharray="6 4"/>`;
 
   o += ln(cx - R - 30, cy, cx + R + 30, cy, '#666', 1, '8 4');
-
   o += ln(cx, cy - R - 30, cx, cy + R + 30, '#666', 1, '8 4');
 
   let a1 = -Math.PI / 4;
@@ -1759,7 +1754,7 @@ function drawShaft(d) {
   let s = $('shs'), cy = 170, xStart = 70, L = 800;
   let shDia = Math.max(20, d.srec); 
   let impFitDia = Math.round(shDia * 0.8 * 10) / 10; // Diameter bubut ujung impeller
-
+  
   let o = '<rect width="950" height="400" fill="#ffffff"/>' + 
           t(25, 30, 'DETIL BUBUT POROS & SPACING BEARING (SHAFT MACHINING DRAWING)', '#17365d', 16);
 
@@ -1776,7 +1771,7 @@ function drawShaft(d) {
   let mainW = L - 180;
   let yTop = cy - shDia / 2;
   o += `<rect x="${xStart + driveW}" y="${yTop}" width="${mainW}" height="${shDia}" fill="#d0d7de" stroke="#333" stroke-width="1.5"/>`;
-
+  
   // 3. Rumah Bearing (Brg 1 & Brg 2)
   let bLen = N('blen') || 400;
   let bx1 = xStart + driveW + 100;
